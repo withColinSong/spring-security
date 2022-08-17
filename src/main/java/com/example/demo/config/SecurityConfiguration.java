@@ -1,10 +1,16 @@
 package com.example.demo.config;
 
+import com.example.demo.filter.MyFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.AuthenticationFilter;
+import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
+import org.springframework.security.web.context.SecurityContextPersistenceFilter;
+import org.springframework.security.web.session.SessionManagementFilter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
@@ -12,6 +18,11 @@ import org.springframework.web.filter.CorsFilter;
 
 import static org.springframework.security.config.Customizer.withDefaults;
 
+
+/**
+ * SecurityContextPersistenceFilter
+ * 기존에 인증된 정보가 있다면 다음 요청에서도 다시 인증을 하지않도록 SecurityContext를 공유하는 기능을 제공한다.
+ */
 @Configuration
 public class SecurityConfiguration {
 
@@ -21,8 +32,9 @@ public class SecurityConfiguration {
         http
                 .csrf().disable() // csrf 방지
                 .formLogin().disable()
-                .logout().disable()
+                //.logout().disable()
                 .addFilter(corsFilter())
+                .addFilterBefore(new MyFilter(), SecurityContextPersistenceFilter.class)
                 .authorizeHttpRequests( // 권한
                     (authz) -> authz
                             .antMatchers("/user").hasRole("USER")
