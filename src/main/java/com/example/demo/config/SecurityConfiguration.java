@@ -20,7 +20,7 @@ import static org.springframework.security.config.Customizer.withDefaults;
 
 
 /**
- * SecurityContextPersistenceFilter
+ * SecurityContextPersistenceFilter @Deprecated
  * 기존에 인증된 정보가 있다면 다음 요청에서도 다시 인증을 하지않도록 SecurityContext를 공유하는 기능을 제공한다.
  */
 @Configuration
@@ -34,7 +34,6 @@ public class SecurityConfiguration {
                 .formLogin().disable()
                 //.logout().disable()
                 .addFilter(corsFilter())
-                .addFilterBefore(new MyFilter(), SecurityContextPersistenceFilter.class)
                 .authorizeHttpRequests( // 권한
                     (authz) -> authz
                             .antMatchers("/user").hasRole("USER")
