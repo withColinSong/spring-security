@@ -9,7 +9,7 @@
 
 ## 1\. 1 WebSecurityConfigurerAdapter Deprecated
 
-```
+```java
 @Configuration  
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {  
 
@@ -27,7 +27,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 -   기존 방식은 **WebSecurityConfigurerAdapter**를 상속받아 configure을 Override하여 구현한다.
 
-```
+```java
 @Configuration  
 public class SecurityConfiguration {  
 
@@ -56,7 +56,7 @@ public class SecurityConfiguration {
 -   기존에 인증된 정보가 있다면 다음 요청에서도 다시 인증을 하지않도록 SecurityContext를 공유하는 기능을 제공한다.
 -   사용하게 된다면 아래와 같이 취소선으로 알려준다.
 
-[##_Image|kage@5GDeN/btrJ2obCpGN/NkAZKpkuTH92gHBU3r5eJ0/img.png|CDM|1.3|{"originWidth":590,"originHeight":27,"style":"alignCenter","caption":"SecurityContextPersistenceFilter Deprecated","filename":"Pasted image 20220818223210.png"}_##]
+![image](https://user-images.githubusercontent.com/71534090/185418705-ab486d60-d673-496d-a280-73a0b9d03d3c.png)
 
 # 2\. 참고문서
 
